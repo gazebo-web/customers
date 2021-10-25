@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-// service contains the business logic to manage customers.
+// service contains business logic to manage customers.
 type service struct {
 	logger *log.Logger
 }

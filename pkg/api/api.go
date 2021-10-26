@@ -4,8 +4,8 @@ import "context"
 
 // CustomersV1 holds the methods that allow managing customers.
 type CustomersV1 interface {
-	// GetCustomer returns the customer of a certain application.
-	GetCustomer(ctx context.Context, req GetCustomerRequest) (GetCustomerResponse, error)
+	// GetIdentity returns the customer or a user of a certain application.
+	GetIdentity(ctx context.Context, req GetIdentityRequest) (GetIdentityResponse, error)
 
 	// CreateCustomer creates a new customer for a certain application.
 	CreateCustomer(ctx context.Context, req CreateCustomerRequest) (CreateCustomerResponse, error)

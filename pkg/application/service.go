@@ -12,8 +12,8 @@ type service struct {
 	logger *log.Logger
 }
 
-// GetCustomer returns the customer of a certain application.
-func (s *service) GetCustomer(ctx context.Context, req api.GetCustomerRequest) (api.GetCustomerResponse, error) {
+// GetIdentity returns the customer or a user of a certain application.
+func (s *service) GetIdentity(ctx context.Context, req api.GetIdentityRequest) (api.GetIdentityResponse, error) {
 	panic("implement me")
 }
 

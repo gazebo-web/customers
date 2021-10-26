@@ -8,8 +8,8 @@ import (
 // client contains the HTTP client to connect to the customers API.
 type client struct{}
 
-// GetCustomer performs an HTTP request to get a customer of a certain application.
-func (c *client) GetCustomer(ctx context.Context, req api.GetCustomerRequest) (api.GetCustomerResponse, error) {
+// GetIdentity performs an HTTP request to get a customer or a user of a certain application.
+func (c *client) GetIdentity(ctx context.Context, req api.GetIdentityRequest) (api.GetIdentityResponse, error) {
 	panic("implement me")
 }
 

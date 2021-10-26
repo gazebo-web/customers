@@ -5,7 +5,7 @@ import (
 	"gitlab.com/ignitionrobotics/billing/customers/pkg/api"
 )
 
-// client contains the HTTP client to connect to the customers API.
+// client contains the HTTP client to connect to a api.CustomersV1 service.
 type client struct{}
 
 // GetIdentity performs an HTTP request to get a customer or a user of a certain application.

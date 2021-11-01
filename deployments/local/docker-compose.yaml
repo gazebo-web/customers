@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  db:
+    container_name: "customers_db"
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: customers
+      MYSQL_ROOT_PASSWORD: root

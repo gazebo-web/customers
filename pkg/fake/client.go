@@ -14,10 +14,17 @@ type Fake struct {
 	mock.Mock
 }
 
-// GetIdentity mocks a call to the Customers API.
-func (f *Fake) GetIdentity(ctx context.Context, req api.GetIdentityRequest) (api.GetIdentityResponse, error) {
+// GetCustomerByHandle mocks a call to the Customers API.
+func (f *Fake) GetCustomerByHandle(ctx context.Context, req api.GetCustomerByHandleRequest) (api.GetCustomerResponse, error) {
 	args := f.Called(ctx, req)
-	res := args.Get(0).(api.GetIdentityResponse)
+	res := args.Get(0).(api.GetCustomerResponse)
+	return res, args.Error(1)
+}
+
+// GetCustomerByID mocks a call to the Customers API.
+func (f *Fake) GetCustomerByID(ctx context.Context, req api.GetCustomerByIDRequest) (api.GetCustomerResponse, error) {
+	args := f.Called(ctx, req)
+	res := args.Get(0).(api.GetCustomerResponse)
 	return res, args.Error(1)
 }
 

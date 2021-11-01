@@ -11,6 +11,25 @@ include:
   - remote: https://gitlab.com/ignitionrobotics/web/golang-ci/-/raw/main/package.yml
   - template: Code-Quality.gitlab-ci.yml
 
+variables:
+  MYSQL_DATABASE: customers
+  MYSQL_ROOT_PASSWORD: root
+
+test:
+  services:
+    - name: mysql:latest
+      alias: mysql
+
+coverage:
+  services:
+    - name: mysql:latest
+      alias: mysql
+
+race:
+  services:
+    - name: mysql:latest
+      alias: mysql
+
 code_quality:
   variables:
     REPORT_FORMAT: html

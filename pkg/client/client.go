@@ -8,8 +8,13 @@ import (
 // client contains the HTTP client to connect to a api.CustomersV1 service.
 type client struct{}
 
-// GetIdentity performs an HTTP request to get a customer or a user of a certain application.
-func (c *client) GetIdentity(ctx context.Context, req api.GetIdentityRequest) (api.GetIdentityResponse, error) {
+// GetCustomerByHandle performs an HTTP request to get a customer based on its handle.
+func (c *client) GetCustomerByHandle(ctx context.Context, req api.GetCustomerByHandleRequest) (api.GetCustomerResponse, error) {
+	panic("implement me")
+}
+
+// GetCustomerByID performs an HTTP request to get a customer based on its id.
+func (c *client) GetCustomerByID(ctx context.Context, req api.GetCustomerByIDRequest) (api.GetCustomerResponse, error) {
 	panic("implement me")
 }
 

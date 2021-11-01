@@ -1,51 +1,73 @@
 package api
 
-import "context"
+import (
+	"context"
+	"gitlab.com/ignitionrobotics/billing/customers/pkg/domain/models"
+)
 
 // CustomersV1 holds the methods that allow managing customers.
 type CustomersV1 interface {
-	// GetIdentity returns the customer or a user of a certain application.
-	GetIdentity(ctx context.Context, req GetIdentityRequest) (GetIdentityResponse, error)
+	// GetCustomerByHandle returns customer information based on the customer's application handle.
+	GetCustomerByHandle(ctx context.Context, req GetCustomerByHandleRequest) (GetCustomerResponse, error)
+
+	// GetCustomerByHandle returns customer information based on the customer's external service identity.
+	GetCustomerByID(ctx context.Context, req GetCustomerByIDRequest) (GetCustomerResponse, error)
 
 	// CreateCustomer creates a new customer for a certain application.
 	CreateCustomer(ctx context.Context, req CreateCustomerRequest) (CreateCustomerResponse, error)
 }
 
-// GetIdentityRequest is the input for the CustomersV1.GetIdentity operation.
-// It's used to get the identity of a certain customer or user.
-// If User is passed, it returns the Customer.
-// If Customer is passed, it returns the User.
-// If both values are passed, it returns an error.
-type GetIdentityRequest struct {
-	// User is the username of a certain application that will be returned.
-	// Mutually exclusive with Customer.
-	User string
+// GetCustomerByHandleRequest is the input of the CustomersV1.GetCustomerByHandle method.
+type GetCustomerByHandleRequest struct {
+	// Handle is the customer identity in the context of a certain application.
+	// E.g. application username, application organization name.
+	Handle string
 
-	// Customer is the customer id of the user that will be returned.
-	// Mutually exclusive with User.
-	Customer string
-
-	// Service is the payment service used to register the customer.
+	// Service is the payment service provider the customer is registered in.
+	// E.g. Stripe, PayPal
 	Service string
 
 	// Application is the application that originated the creation of the customer.
 	Application string
 }
 
-// GetIdentityResponse is the output of the CustomersV1.GetIdentity operation.
-// It's used to return a user or a customer depending on the parameters set in GetIdentityRequest.
-type GetIdentityResponse struct {
-	// User contains the username.
-	User *string
+// GetCustomerByIDRequest is the input of the CustomersV1.GetCustomerByID method.
+type GetCustomerByIDRequest struct {
+	// ID is the customer identity in the context of an external service.
+	ID string
 
-	// Customer contains the customer id.
-	Customer *string
-
-	// Service is the payment service used to register the customer.
+	// Service is the service provider the customer is registered in.
+	// E.g. Stripe, PayPal
 	Service string
 
 	// Application is the application that originated the creation of the customer.
 	Application string
+}
+
+// GetCustomerResponse is the output from the CustomersV1.GetCustomerByHandle and the CustomersV1.GetCustomerByID methods.
+type GetCustomerResponse struct {
+	// ID is the customer identity in the context of an external service.
+	ID string
+
+	// Handle is the customer identity in the context of a certain application.
+	// E.g. application username, application organization name.
+	Handle string
+
+	// Service is the service provider the customer is registered in.
+	// E.g. Stripe, PayPal
+	Service string
+
+	// Application is the application that originated the creation of the customer.
+	Application string
+}
+
+// FromCustomer fills the current response with data from the given models.Customer.
+func (res *GetCustomerResponse) FromCustomer(customer models.Customer) GetCustomerResponse {
+	res.ID = customer.CustomerID
+	res.Handle = customer.Handle
+	res.Service = customer.Service
+	res.Application = customer.Application
+	return *res
 }
 
 // CreateCustomerRequest is the input for the CustomersV1.CreateCustomer operation.

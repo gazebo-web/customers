@@ -39,3 +39,8 @@ func GetCustomerByCustomerID(db *gorm.DB, application, service, id string) (mode
 	}
 	return result, nil
 }
+
+// IsErrorNotFound returns true when the given error is a not found error
+func IsErrorNotFound(err error) bool {
+	return err == gorm.ErrRecordNotFound
+}

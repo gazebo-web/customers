@@ -2,7 +2,22 @@ package api
 
 import (
 	"context"
+	"errors"
 	"gitlab.com/ignitionrobotics/billing/customers/pkg/domain/models"
+)
+
+var (
+	// ErrCustomerMissingIdentityValue is returned when no user or customer is provided.
+	ErrCustomerMissingIdentityValue = errors.New("no identity value provided")
+
+	// ErrIdentityMissingApplication is returned when no application is provided.
+	ErrIdentityMissingApplication = errors.New("no application provided")
+
+	// ErrIdentityMissingService is returned when no payment service is provided.
+	ErrIdentityMissingService = errors.New("no service provided")
+
+	// ErrCustomerNotFound is returned when the customer has not been found.
+	ErrCustomerNotFound = errors.New("customer not found")
 )
 
 // CustomersV1 holds the methods that allow managing customers.
@@ -10,7 +25,7 @@ type CustomersV1 interface {
 	// GetCustomerByHandle returns customer information based on the customer's application handle.
 	GetCustomerByHandle(ctx context.Context, req GetCustomerByHandleRequest) (GetCustomerResponse, error)
 
-	// GetCustomerByHandle returns customer information based on the customer's external service identity.
+	// GetCustomerByID returns customer information based on the customer's external service identity.
 	GetCustomerByID(ctx context.Context, req GetCustomerByIDRequest) (GetCustomerResponse, error)
 
 	// CreateCustomer creates a new customer for a certain application.

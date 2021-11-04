@@ -106,7 +106,7 @@ func (s *testGetIdentitySuite) TestGetIdentityMissingIdentity() {
 		Application: "fuel",
 	})
 	s.Assert().Error(err)
-	s.Assert().Equal(ErrCustomerMissingIdentityValue, err)
+	s.Assert().Equal(api.ErrCustomerMissingIdentityValue, err)
 
 	_, err = s.Service.GetCustomerByID(context.Background(), api.GetCustomerByIDRequest{
 		ID:          "",
@@ -114,7 +114,7 @@ func (s *testGetIdentitySuite) TestGetIdentityMissingIdentity() {
 		Application: "fuel",
 	})
 	s.Assert().Error(err)
-	s.Assert().Equal(ErrCustomerMissingIdentityValue, err)
+	s.Assert().Equal(api.ErrCustomerMissingIdentityValue, err)
 }
 
 func (s *testGetIdentitySuite) TestGetIdentityMissingApplication() {
@@ -124,7 +124,7 @@ func (s *testGetIdentitySuite) TestGetIdentityMissingApplication() {
 		Application: "",
 	})
 	s.Assert().Error(err)
-	s.Assert().Equal(ErrIdentityMissingApplication, err)
+	s.Assert().Equal(api.ErrIdentityMissingApplication, err)
 
 	_, err = s.Service.GetCustomerByID(context.Background(), api.GetCustomerByIDRequest{
 		ID:          "customer1",
@@ -132,7 +132,7 @@ func (s *testGetIdentitySuite) TestGetIdentityMissingApplication() {
 		Application: "",
 	})
 	s.Assert().Error(err)
-	s.Assert().Equal(ErrIdentityMissingApplication, err)
+	s.Assert().Equal(api.ErrIdentityMissingApplication, err)
 }
 
 func (s *testGetIdentitySuite) TestGetIdentityMissingService() {
@@ -142,7 +142,7 @@ func (s *testGetIdentitySuite) TestGetIdentityMissingService() {
 		Application: "fuel",
 	})
 	s.Assert().Error(err)
-	s.Assert().Equal(ErrIdentityMissingService, err)
+	s.Assert().Equal(api.ErrIdentityMissingService, err)
 
 	_, err = s.Service.GetCustomerByID(context.Background(), api.GetCustomerByIDRequest{
 		ID:          "customer1",
@@ -150,7 +150,7 @@ func (s *testGetIdentitySuite) TestGetIdentityMissingService() {
 		Application: "fuel",
 	})
 	s.Assert().Error(err)
-	s.Assert().Equal(ErrIdentityMissingService, err)
+	s.Assert().Equal(api.ErrIdentityMissingService, err)
 }
 
 func (s *testGetIdentitySuite) TestGetIdentityNotFound() {

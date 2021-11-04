@@ -23,13 +23,13 @@ var (
 // CustomersV1 holds the methods that allow managing customers.
 type CustomersV1 interface {
 	// GetCustomerByHandle returns customer information based on the customer's application handle.
-	GetCustomerByHandle(ctx context.Context, req GetCustomerByHandleRequest) (GetCustomerResponse, error)
+	GetCustomerByHandle(ctx context.Context, req GetCustomerByHandleRequest) (CustomerResponse, error)
 
 	// GetCustomerByID returns customer information based on the customer's external service identity.
-	GetCustomerByID(ctx context.Context, req GetCustomerByIDRequest) (GetCustomerResponse, error)
+	GetCustomerByID(ctx context.Context, req GetCustomerByIDRequest) (CustomerResponse, error)
 
 	// CreateCustomer creates a new customer for a certain application.
-	CreateCustomer(ctx context.Context, req CreateCustomerRequest) (CreateCustomerResponse, error)
+	CreateCustomer(ctx context.Context, req CreateCustomerRequest) (CustomerResponse, error)
 }
 
 // GetCustomerByHandleRequest is the input of the CustomersV1.GetCustomerByHandle method.
@@ -59,8 +59,10 @@ type GetCustomerByIDRequest struct {
 	Application string
 }
 
-// GetCustomerResponse is the output from the CustomersV1.GetCustomerByHandle and the CustomersV1.GetCustomerByID methods.
-type GetCustomerResponse struct {
+// CustomerResponse is the output from multiple operations that need to return a single customer information.
+// CustomersV1.GetCustomerByHandle, CustomersV1.GetCustomerByID and CustomersV1.CreateCustomer are examples of methods that
+// return this data structure.
+type CustomerResponse struct {
 	// ID is the customer identity in the context of an external service.
 	ID string
 
@@ -77,7 +79,7 @@ type GetCustomerResponse struct {
 }
 
 // FromCustomer fills the current response with data from the given models.Customer.
-func (res *GetCustomerResponse) FromCustomer(customer models.Customer) GetCustomerResponse {
+func (res *CustomerResponse) FromCustomer(customer models.Customer) CustomerResponse {
 	res.ID = customer.CustomerID
 	res.Handle = customer.Handle
 	res.Service = customer.Service
@@ -86,7 +88,18 @@ func (res *GetCustomerResponse) FromCustomer(customer models.Customer) GetCustom
 }
 
 // CreateCustomerRequest is the input for the CustomersV1.CreateCustomer operation.
-type CreateCustomerRequest struct{}
+type CreateCustomerRequest struct {
+	// ID is the customer identity in the context of an external service.
+	ID string
 
-// CreateCustomerResponse is the output of the CustomersV1.CreateCustomer operation.
-type CreateCustomerResponse struct{}
+	// Handle is the customer identity in the context of a certain application.
+	// E.g. application username, application organization name.
+	Handle string
+
+	// Service is the service provider the customer is registered in.
+	// E.g. Stripe, PayPal
+	Service string
+
+	// Application is the application that originated the creation of the customer.
+	Application string
+}

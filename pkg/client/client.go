@@ -9,17 +9,17 @@ import (
 type client struct{}
 
 // GetCustomerByHandle performs an HTTP request to get a customer based on its handle.
-func (c *client) GetCustomerByHandle(ctx context.Context, req api.GetCustomerByHandleRequest) (api.GetCustomerResponse, error) {
+func (c *client) GetCustomerByHandle(ctx context.Context, req api.GetCustomerByHandleRequest) (api.CustomerResponse, error) {
 	panic("implement me")
 }
 
 // GetCustomerByID performs an HTTP request to get a customer based on its id.
-func (c *client) GetCustomerByID(ctx context.Context, req api.GetCustomerByIDRequest) (api.GetCustomerResponse, error) {
+func (c *client) GetCustomerByID(ctx context.Context, req api.GetCustomerByIDRequest) (api.CustomerResponse, error) {
 	panic("implement me")
 }
 
 // CreateCustomer performs an HTTP request to create a new customer for a certain application.
-func (c *client) CreateCustomer(ctx context.Context, req api.CreateCustomerRequest) (api.CreateCustomerResponse, error) {
+func (c *client) CreateCustomer(ctx context.Context, req api.CreateCustomerRequest) (api.CustomerResponse, error) {
 	panic("implement me")
 }
 

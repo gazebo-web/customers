@@ -15,23 +15,23 @@ type Fake struct {
 }
 
 // GetCustomerByHandle mocks a call to the Customers API.
-func (f *Fake) GetCustomerByHandle(ctx context.Context, req api.GetCustomerByHandleRequest) (api.GetCustomerResponse, error) {
+func (f *Fake) GetCustomerByHandle(ctx context.Context, req api.GetCustomerByHandleRequest) (api.CustomerResponse, error) {
 	args := f.Called(ctx, req)
-	res := args.Get(0).(api.GetCustomerResponse)
+	res := args.Get(0).(api.CustomerResponse)
 	return res, args.Error(1)
 }
 
 // GetCustomerByID mocks a call to the Customers API.
-func (f *Fake) GetCustomerByID(ctx context.Context, req api.GetCustomerByIDRequest) (api.GetCustomerResponse, error) {
+func (f *Fake) GetCustomerByID(ctx context.Context, req api.GetCustomerByIDRequest) (api.CustomerResponse, error) {
 	args := f.Called(ctx, req)
-	res := args.Get(0).(api.GetCustomerResponse)
+	res := args.Get(0).(api.CustomerResponse)
 	return res, args.Error(1)
 }
 
 // CreateCustomer mocks a call to the Customers API.
-func (f *Fake) CreateCustomer(ctx context.Context, req api.CreateCustomerRequest) (api.CreateCustomerResponse, error) {
+func (f *Fake) CreateCustomer(ctx context.Context, req api.CreateCustomerRequest) (api.CustomerResponse, error) {
 	args := f.Called(ctx, req)
-	res := args.Get(0).(api.CreateCustomerResponse)
+	res := args.Get(0).(api.CustomerResponse)
 	return res, args.Error(1)
 }
 

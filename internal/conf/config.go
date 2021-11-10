@@ -43,6 +43,9 @@ func (db *Database) Parse() error {
 type Config struct {
 	// Database contains the configuration needed to open an SQL connection.
 	Database Database
+
+	// Port defines the TCP port to listen for incoming HTTP requests.
+	Port uint `env:"CUSTOMERS_HTTP_SERVER_PORT" envDefault:"80"`
 }
 
 // Parse fills Config data from an external source.

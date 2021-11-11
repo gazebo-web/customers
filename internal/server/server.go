@@ -29,6 +29,10 @@ func Run(config conf.Config, logger *log.Logger) error {
 		return err
 	}
 
+	if err = persistence.MigrateTables(db); err != nil {
+		return err
+	}
+
 	logger.Println("Initializing Customers service")
 	cs := application.NewService(db, logger)
 

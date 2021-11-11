@@ -36,27 +36,27 @@ type CustomersV1 interface {
 type GetCustomerByHandleRequest struct {
 	// Handle is the customer identity in the context of a certain application.
 	// E.g. application username, application organization name.
-	Handle string
+	Handle string `json:"handle"`
 
 	// Service is the payment service provider the customer is registered in.
 	// E.g. Stripe, PayPal
-	Service string
+	Service string `json:"service"`
 
 	// Application is the application that originated the creation of the customer.
-	Application string
+	Application string `json:"application"`
 }
 
 // GetCustomerByIDRequest is the input of the CustomersV1.GetCustomerByID method.
 type GetCustomerByIDRequest struct {
 	// ID is the customer identity in the context of an external service.
-	ID string
+	ID string `json:"id"`
 
 	// Service is the service provider the customer is registered in.
 	// E.g. Stripe, PayPal
-	Service string
+	Service string `json:"service"`
 
 	// Application is the application that originated the creation of the customer.
-	Application string
+	Application string `json:"application"`
 }
 
 // CustomerResponse is the output from multiple operations that need to return a single customer information.
@@ -64,18 +64,18 @@ type GetCustomerByIDRequest struct {
 // return this data structure.
 type CustomerResponse struct {
 	// ID is the customer identity in the context of an external service.
-	ID string
+	ID string `json:"id"`
 
 	// Handle is the customer identity in the context of a certain application.
 	// E.g. application username, application organization name.
-	Handle string
+	Handle string `json:"handle"`
 
 	// Service is the service provider the customer is registered in.
 	// E.g. Stripe, PayPal
-	Service string
+	Service string `json:"service"`
 
 	// Application is the application that originated the creation of the customer.
-	Application string
+	Application string `json:"application"`
 }
 
 // FromCustomer fills the current response with data from the given models.Customer.
@@ -90,16 +90,16 @@ func (res *CustomerResponse) FromCustomer(customer models.Customer) CustomerResp
 // CreateCustomerRequest is the input for the CustomersV1.CreateCustomer operation.
 type CreateCustomerRequest struct {
 	// ID is the customer identity in the context of an external service.
-	ID string
+	ID string `json:"id"`
 
 	// Handle is the customer identity in the context of a certain application.
 	// E.g. application username, application organization name.
-	Handle string
+	Handle string `json:"handle"`
 
 	// Service is the service provider the customer is registered in.
 	// E.g. Stripe, PayPal
-	Service string
+	Service string `json:"service"`
 
 	// Application is the application that originated the creation of the customer.
-	Application string
+	Application string `json:"application"`
 }
